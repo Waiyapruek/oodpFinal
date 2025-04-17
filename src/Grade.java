@@ -1,20 +1,14 @@
 class Grade {
     private Student student;
-    private Course course;
     private double score;
 
-    public Grade(Student student, Course course, double score) {
+    public Grade(Student student, double score) {
         this.student = student;
-        this.course = course;
         this.score = score;
     }
 
     public Student getStudent() {
         return student;
-    }
-
-    public Course getCourse() {
-        return course;
     }
 
     public double getScore() {
@@ -25,7 +19,7 @@ class Grade {
         this.score = score;
     }
 
-    public String getLetterGrade() {
+    public String getGrade() {
         if (score >= 80) return "A";
         else if (score >= 70) return "B";
         else if (score >= 60) return "C";
@@ -34,6 +28,6 @@ class Grade {
     }
 
     public String toString() {
-        return student.getName() + " - " + course.getTitle() + ": " + score + " (" + getLetterGrade() + ")";
+        return student.getName() + ": " + score + " (" + getGrade() + ")";
     }
 }
