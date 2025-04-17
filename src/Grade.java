@@ -28,6 +28,7 @@ class Grade {
     }
 
     public String toString() {
-        return student.getName() + ": " + score + " (" + getGrade() + ")";
+        return "ID: " + student.getID() + ", Name: " + student.getName() +
+        ", Score: " + score + ", Grade: " + getGrade();
     }
 }

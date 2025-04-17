@@ -37,8 +37,7 @@ class GradeManager {
     public void saveToFile(String filename) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
             for (Grade g : grades) {
-                writer.println(g.getStudent().getID() + "," + g.getStudent().getName() + "," + g.getScore() + "," + g.getGrade());
-                
+                writer.println(g.toString()); // use the same format as printAllGrades
             }
             System.out.println("Grades saved to " + filename);
         } catch (IOException e) {
@@ -48,21 +47,31 @@ class GradeManager {
 
     public void loadFromFile(String filename) {
         grades.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                if (parts.length >= 3) {
-                    String studentID = parts[0];
-                    String studentName = parts[1];
-                    double score = Double.parseDouble(parts[2].trim());
+    try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            // Example: "ID: 1, Name: a, Score: 50.0, Grade: D"
+            String[] parts = line.split(",");
+
+            if (parts.length >= 3) {
+                String studentID = parts[0].split(":")[1].trim();
+                String studentName = parts[1].split(":")[1].trim();
+                String scoreStr = parts[2].split(":")[1].trim();
+
+                try {
+                    double score = Double.parseDouble(scoreStr);
                     Student student = new Student(studentID, studentName);
                     grades.add(new Grade(student, score));
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid score format for line: " + line);
                 }
+            } else {
+                System.out.println("Invalid line format: " + line);
             }
-            System.out.println("Grades loaded from " + filename);
-        } catch (IOException e) {
-            System.out.println("Error loading grades: " + e.getMessage());
         }
+        System.out.println("Grades loaded from " + filename);
+    } catch (IOException e) {
+        System.out.println("Error loading grades: " + e.getMessage());
+    }
     }
 }
