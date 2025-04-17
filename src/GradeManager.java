@@ -37,7 +37,8 @@ class GradeManager {
     public void saveToFile(String filename) {
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
             for (Grade g : grades) {
-                writer.println(g.getStudent().getID() + "," + g.getStudent().getName() + "," + "," + g.getScore() + "," + g.getGrade());
+                writer.println(g.getStudent().getID() + "," + g.getStudent().getName() + "," + g.getScore() + "," + g.getGrade());
+                
             }
             System.out.println("Grades saved to " + filename);
         } catch (IOException e) {
@@ -54,7 +55,7 @@ class GradeManager {
                 if (parts.length >= 3) {
                     String studentID = parts[0];
                     String studentName = parts[1];
-                    double score = Double.parseDouble(parts[2]);
+                    double score = Double.parseDouble(parts[2].trim());
                     Student student = new Student(studentID, studentName);
                     grades.add(new Grade(student, score));
                 }
