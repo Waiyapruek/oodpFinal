@@ -47,7 +47,7 @@ class GradeManager {
                 writer.println(g.toString()); // Save each grade in readable format
             }
             System.out.println("Grades saved to " + filename);
-        } catch (IOException e) {
+        } catch (IOException e) { // if file has no data
             System.out.println("Error saving grades: " + e.getMessage());
         }
     }
@@ -70,7 +70,7 @@ class GradeManager {
                         double score = Double.parseDouble(scoreStr);
                         Student student = new Student(studentID, studentName);
                         grades.add(new Grade(student, score)); // Add new grade to list
-                    } catch (NumberFormatException e) {
+                    } catch (NumberFormatException e) { // if input is not number
                         System.out.println("Invalid score format for line: " + line);
                     }
                 } else {
@@ -78,7 +78,7 @@ class GradeManager {
                 }
             }
             System.out.println("Grades loaded from " + filename);
-        } catch (IOException e) {
+        } catch (IOException e) { // if file is not found
             System.out.println("Error loading grades: " + e.getMessage());
         }
     }
