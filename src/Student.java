@@ -9,11 +9,13 @@ class Student extends Person {
     }
 
     // Return student's ID
+    @Override
     public String getID() {
         return id;
     }
 
     // Return student's name
+    @Override
     public String getName() {
         return name;
     }
