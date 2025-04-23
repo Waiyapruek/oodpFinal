@@ -39,8 +39,14 @@ public class ProgramStart {
                         }
                     }
 
-                    // Add the student's grade to the system
-                    gradeManager.addGrade(new Grade(student, score));
+                    // Check if the student already exists
+                    if (gradeManager.getGrade(id) != null) {
+                        System.out.println("Student already exists. \nUpdating score...");
+                        gradeManager.updateScore(id, score); // Update existing score
+                        System.out.println("Score updated successfully.");
+                        break;
+                    }// Add the student's grade to the system
+                    else {gradeManager.addGrade(new Grade(student, score));}
                     break;
 
                 case "2":

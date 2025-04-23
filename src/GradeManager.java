@@ -25,7 +25,7 @@ class GradeManager {
         Grade g = getGrade(studentID);
         if (g != null) {
             g.setScore(score); // Update the score if student is found
-        }
+        }else return; // If student ID not found
     }
 
     // Print all grades to the console
